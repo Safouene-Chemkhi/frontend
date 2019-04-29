@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row class="login-form">
+    <ion-col [formGroup]="form">
+      <ion-list inset>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="person" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="username" placeholder="username" type="text"></ion-input>
+          <ion-chip *ngIf="f.username.touched && f.username.errors" color="danger">
+            <ion-label color="danger">A valid email is required.</ion-label>
+          </ion-chip>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="lock" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="password" placeholder="password" type="password"></ion-input>
+          <ion-chip *ngIf="f.password.touched && f.password.errors" color="danger">
+            <ion-label color="danger">Password must be minimum 5 caracters.</ion-label>
+          </ion-chip>
+        </ion-item>
+
+      </ion-list>
+      <ion-button expand="full" shape="round" (click)="login()" color="success" class="login-button">Login</ion-button>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button expand="full" shape="round" (click)="launchSignup()" color="secondary" class="create-account">Create
+        an Account</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="success">
+    <ion-title>Welcome</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row class="account-form">
+    <ion-col [formGroup]="form">
+      <ion-list inset>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="person" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="first_name" placeholder="First Name" type="text"></ion-input>
+          <ion-chip *ngIf="f.first_name.touched && f.first_name.errors" color="danger">
+              <ion-label color="danger">Minimum 5 caracters.</ion-label>
+            </ion-chip>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="person" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="last_name" placeholder="Last Name" type="text"></ion-input>
+          <ion-chip *ngIf="f.last_name.touched && f.last_name.errors" color="danger">
+              <ion-label color="danger">Minimum 5 caracters.</ion-label>
+            </ion-chip>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="mail" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="email" placeholder="Email" type="email"></ion-input>
+          <ion-chip *ngIf="f.email.touched && f.email.errors" color="danger">
+              <ion-label color="danger">A valid email is required.</ion-label>
+            </ion-chip>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="age" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="age" placeholder="Age" type="number"></ion-input>
+          <ion-chip *ngIf="f.age.touched && f.age.errors" color="danger">
+              <ion-label color="danger">A valid age is required.</ion-label>
+            </ion-chip>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="locate" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="city" placeholder="City" type="text"></ion-input>
+          <ion-input formControlName="country" placeholder="Country" type="text"></ion-input>
+          <ion-input formControlName="pc" placeholder="PC" type="number"></ion-input>
+        </ion-item>
+
+
+        <ion-segment formControlName="gender" color="success">
+          <ion-segment-button ionSelect value="female">
+            <ion-icon name="female"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="male">
+            <ion-icon name="male"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+
+        <ion-item>
+          <ion-icon name="medical" color="success"></ion-icon>
+          <ion-label>Doctor</ion-label>
+          <ion-checkbox formControlName="doctor" color="success"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="lock"  color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="password" placeholder="Password" type="password"></ion-input>
+          <ion-chip *ngIf="f.password.touched && f.password.errors" color="danger">
+              <ion-label color="danger">A valid password is required.</ion-label>
+            </ion-chip>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="lock" color="success"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="confirmPassword" placeholder="Confirm password" type="password"></ion-input>
+          <ion-chip *ngIf="f.confirmPassword.touched && checkPasswords" color="danger">
+              <ion-label color="danger">Passwords must match.</ion-label>
+            </ion-chip>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-button expand="full" shape="round" (click)="register()" color="secondary">Register</ion-button>
+
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="success">
+    <ion-title>Welcome</ion-title>
+  </ion-toolbar>
+</ion-footer>

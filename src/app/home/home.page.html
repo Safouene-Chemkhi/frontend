@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <div class="controls cf">
+    <div class="control search" (click)="presentAlert()">
+      <div class="control-icon">
+        <i class="material-icons">&#xE8B6;</i>
+      </div>
+      <div class="control-field search-field form-control overflow-wrap">
+        Set Topic
+      </div>
+    </div>
+
+    <div class="control filter">
+      <div class="control-icon">
+        <i class="material-icons">&#xE152;</i>
+      </div>
+      <div class="select-arrow">
+        <i class="material-icons">&#xE313;</i>
+      </div>
+      <ion-select class="control-field filter-field form-control" [interfaceOptions]="customActionSheetOptions"
+        interface="popover" (ionChange)="show($event.target.value)">
+        <ion-select-option value="all" selected>All</ion-select-option>
+        <ion-select-option value="acceleration">Acceleration</ion-select-option>
+        <ion-select-option value="ecg">ECG</ion-select-option>
+        <ion-select-option value="respiration">Respiration signals</ion-select-option>
+        <ion-select-option value="history">Activity history</ion-select-option>
+      </ion-select>
+
+    </div>
+    <div class="control sort">
+      <div class="control-icon">
+        <i class="material-icons">&#xE164;</i>
+      </div>
+      <div class="select-arrow">
+        <i class="material-icons">&#xE313;</i>
+      </div>
+      <ion-select class="control-field filter-field form-control" [interfaceOptions]="customActionSheetOptions2"
+        interface="popover" (ionChange)="drag($event.target.value)">
+        <ion-select-option value="enabled" selected>Enable</ion-select-option>
+        <ion-select-option value="disabled">Disable</ion-select-option>
+      </ion-select>
+    </div>
+
+  </div>
+
+  <gridster [options]="options">
+    <gridster-item [item]="item.item" *ngFor="let item of dashboardItems">
+      <div class="button-holder">
+        <div class="gridster-item-content">
+          <ion-badge size="small" style="float:right;" color="danger" (mousedown)="removeItem($event, item)"
+            (touchstart)="removeItem($event, item)">
+            <ion-icon name="close"></ion-icon>
+          </ion-badge>
+          <div [ngSwitch]="item.name">
+            <div *ngSwitchCase="'acceleration'">
+              <ion-label color="primary">Acceleration</ion-label>
+              <div style="display: block;">
+                <canvas baseChart width="400" height="200" [datasets]="accelerationData" [labels]="accelerationLabels"
+                  [options]="accelerationOptions" [legend]="accelerationLegend" [chartType]="accelerationType"></canvas>
+              </div>
+            </div>
+
+            <div *ngSwitchCase="'ecg'">
+              <ion-label color="primary">ECG signal</ion-label>
+              <div style="display: block;">
+                <canvas baseChart width="300" height="200" [datasets]="ecgData" [labels]="ecgLabels" [options]="ecgOptions"
+                  [legend]="ecgLegend" [chartType]="ecgType"></canvas>
+              </div>
+            </div>
+
+            <div *ngSwitchCase="'heartRate'">
+              heartRate
+              <canvas #doughnutCanvas> </canvas>
+            </div>
+
+            <div *ngSwitchCase="'respiration'">
+              <ion-label color="primary">Respiration signal</ion-label>
+              <div style="display: block;">
+                <canvas baseChart width="400" height="200" [datasets]="respirationData" [labels]="respirationLabels"
+                  [options]="respirationOptions" [legend]="respirationLegend" [chartType]="respirationType"></canvas>
+              </div>
+            </div>
+
+            <div *ngSwitchCase="'history'">
+              <ion-label color="primary">Activity history</ion-label>
+              <canvas #doughnutCanvas> </canvas>
+            </div>
+          </div>
+          <!--           <ion-card>
+            <ion-card-header>
+              Line Chart
+            </ion-card-header>
+            <ion-card-content>
+              <canvas #doughnutCanvas> </canvas>
+            </ion-card-content>
+          </ion-card>
+        
+        <label *ngIf="!item.hasContent">{{item.label}}</label>
+
+        <ion-icon name="trash" *ngIf="!item.hasContent" (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)"></ion-icon>
+ -->
+        </div>
+      </div>
+    </gridster-item>
+  </gridster>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="success">
+
+    <ion-segment (ionChange)="segmentChanged($event)" >
+      <ion-segment-button value="start">
+        Start Real Time
+      </ion-segment-button>
+      <ion-segment-button value="stop">
+        Stop Real Time
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
